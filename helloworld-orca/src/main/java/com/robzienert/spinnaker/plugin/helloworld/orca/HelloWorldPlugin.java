@@ -15,8 +15,8 @@
  */
 package com.robzienert.spinnaker.plugin.helloworld.orca;
 
-import com.netflix.spinnaker.kork.plugins.ConfigurableExtension;
-import com.netflix.spinnaker.kork.plugins.SpinnakerExtension;
+import com.netflix.spinnaker.kork.plugins.api.ConfigurableExtension;
+import com.netflix.spinnaker.kork.plugins.api.SpinnakerExtension;
 import com.netflix.spinnaker.orca.api.SimpleStage;
 import com.netflix.spinnaker.orca.api.SimpleStageInput;
 import com.netflix.spinnaker.orca.api.SimpleStageOutput;
