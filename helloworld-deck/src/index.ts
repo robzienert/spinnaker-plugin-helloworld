@@ -1,5 +1,5 @@
-import { customStage  } from './CustomStage'
+import { helloWorldStage  } from './HelloWorldStage'
 
 export const plugin = {
-  stages: [customStage]
+  stages: [helloWorldStage]
 };
