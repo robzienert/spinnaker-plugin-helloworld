@@ -17,7 +17,7 @@ const HelloWorldConfig = (props: IStageConfigProps) => (
 export function HelloWorldDetails(props: IExecutionDetailsSectionProps & { title: string }) {
   return (
       <ExecutionDetailsSection name={props.name} current={props.current}>
-        <div className="helloworld"><p>{props.stage.outputs.message}</p></div>
+        <div className="helloworld v2"><p>{props.stage.outputs.message}</p></div>
       </ExecutionDetailsSection>
   )
 }
