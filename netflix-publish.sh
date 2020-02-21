@@ -33,7 +33,7 @@ mv build/distributions/plugin-info.tmp build/distributions/plugin-info.json
 
 metatron curl -a gate -X POST -H "Content-Type: application/zip" \
   --data "@build/distributions/$ARTIFACT" \
-  "$SPIN_URL:7004/pluginBinaries/$ID/$VERSION?sha512sum=$SHA"
+  "$SPIN_URL:7004/plugins/upload/$ID/$VERSION?sha512sum=$SHA"
 metatron curl -a gate -X POST -H "Content-Type: application/json" \
   --data "@build/distributions/plugin-info.json" \
   $SPIN_URL:7004/pluginInfo
