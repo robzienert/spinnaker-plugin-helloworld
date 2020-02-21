@@ -15,8 +15,6 @@
  */
 package com.robzienert.spinnaker.plugin.helloworld.orca;
 
-import com.netflix.spinnaker.kork.plugins.api.ConfigurableExtension;
-import com.netflix.spinnaker.kork.plugins.api.SpinnakerExtension;
 import com.netflix.spinnaker.orca.api.SimpleStage;
 import com.netflix.spinnaker.orca.api.SimpleStageInput;
 import com.netflix.spinnaker.orca.api.SimpleStageOutput;
@@ -50,12 +48,13 @@ public class HelloWorldPlugin extends Plugin {
    * It says hello.
    */
   @Extension
-  @SpinnakerExtension(id = "com.robzienert.helloworld")
-  public static class HelloWorldStage implements
-    SimpleStage<HelloWorldStage.Input>,
-    ConfigurableExtension<HelloWorldStageConfigProperties> {
+  public static class HelloWorldStage implements SimpleStage<HelloWorldStage.Input> {
 
     private HelloWorldStageConfigProperties properties;
+
+    public HelloWorldStage(HelloWorldStageConfigProperties properties) {
+      this.properties = properties;
+    }
 
     @Override public SimpleStageOutput execute(
       SimpleStageInput<HelloWorldStage.Input> simpleStageInput) {
@@ -73,10 +72,6 @@ public class HelloWorldPlugin extends Plugin {
 
     @Override public String getName() {
       return "helloWorld";
-    }
-
-    @Override public void setConfiguration(HelloWorldStageConfigProperties configuration) {
-      properties = configuration;
     }
 
     public static class Input {
