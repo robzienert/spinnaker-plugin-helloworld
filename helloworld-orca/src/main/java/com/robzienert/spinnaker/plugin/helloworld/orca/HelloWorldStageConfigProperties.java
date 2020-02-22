@@ -18,6 +18,7 @@ package com.robzienert.spinnaker.plugin.helloworld.orca;
 import java.util.Arrays;
 import java.util.List;
 
+@ExtensionConfiguration("hello-world-stage")
 public class HelloWorldStageConfigProperties {
   public String defaultRecipient = "world";
   public List<String> greetings = Arrays.asList("Hello", "Hi");
