@@ -16,10 +16,10 @@ fi
 
 if [ "$SPIN_ENV" == "main" ]; then
   SPIN_URL=https://api.spinnaker.mgmt.netflix.net
-  FRONT50_URL=https://front50-main.spinnaker.mgmt.netflix.net
+  FRONT50_URL=https://front50-main.us-west-2.spinnaker.mgmt.netflix.net
 else
   SPIN_URL=https://api-$SPIN_ENV.spinnaker.mgmt.netflix.net
-  FRONT50_URL=https://front50-$SPIN_ENV.spinnaker.mgmt.netflix.net
+  FRONT50_URL=https://front50-$SPIN_ENV.us-west-2.spinnaker.mgmt.netflix.net
 fi
 
 VERSION="$1"
@@ -31,9 +31,12 @@ ID=$(jq -r '.id' < build/distributions/plugin-info.json)
 jq ".releases[].url = \"$FRONT50_URL/pluginBinaries/$ID/$VERSION\"" build/distributions/plugin-info.json > build/distributions/plugin-info.tmp
 mv build/distributions/plugin-info.tmp build/distributions/plugin-info.json
 
-metatron curl -a gate -X POST -H "Content-Type: application/zip" \
+echo "Publishing binary..."
+metatron curl -a gate -X POST -H "Content-Type: application/octet-stream" \
   --data "@build/distributions/$ARTIFACT" \
   "$SPIN_URL:7004/plugins/upload/$ID/$VERSION?sha512sum=$SHA"
+echo
+echo "Publishing metadata..."
 metatron curl -a gate -X POST -H "Content-Type: application/json" \
   --data "@build/distributions/plugin-info.json" \
   $SPIN_URL:7004/pluginInfo
