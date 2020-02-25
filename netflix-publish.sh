@@ -32,8 +32,8 @@ jq ".releases[].url = \"$FRONT50_URL/pluginBinaries/$ID/$VERSION\"" build/distri
 mv build/distributions/plugin-info.tmp build/distributions/plugin-info.json
 
 echo "Publishing binary..."
-metatron curl -a gate -X POST -H "Content-Type: application/octet-stream" \
-  --data "@build/distributions/$ARTIFACT" \
+metatron curl -a gate -X POST \
+  -F "plugin=@build/distributions/$ARTIFACT" \
   "$SPIN_URL:7004/plugins/upload/$ID/$VERSION?sha512sum=$SHA"
 echo
 echo "Publishing metadata..."
