@@ -15,10 +15,10 @@
  */
 package com.robzienert.spinnaker.plugin.helloworld.orca;
 
-import com.netflix.spinnaker.orca.api.SimpleStage;
-import com.netflix.spinnaker.orca.api.SimpleStageInput;
-import com.netflix.spinnaker.orca.api.SimpleStageOutput;
-import com.netflix.spinnaker.orca.api.SimpleStageStatus;
+import com.netflix.spinnaker.orca.api.simplestage.SimpleStage;
+import com.netflix.spinnaker.orca.api.simplestage.SimpleStageInput;
+import com.netflix.spinnaker.orca.api.simplestage.SimpleStageOutput;
+import com.netflix.spinnaker.orca.api.simplestage.SimpleStageStatus;
 import org.pf4j.Extension;
 import org.pf4j.Plugin;
 import org.pf4j.PluginWrapper;
@@ -57,7 +57,7 @@ public class HelloWorldPlugin extends Plugin {
     }
 
     @Override public SimpleStageOutput execute(
-      SimpleStageInput<HelloWorldStage.Input> simpleStageInput) {
+      SimpleStageInput<Input> simpleStageInput) {
       HelloWorldStage.Output output = new HelloWorldStage.Output();
       output.setOutput(new HelloWorldStage.HelloWorldMessage(
         format("%s, %s!",
@@ -78,7 +78,7 @@ public class HelloWorldPlugin extends Plugin {
       public String recipient;
     }
 
-    public static class Output extends SimpleStageOutput<HelloWorldStage.HelloWorldMessage, Object> {
+    public static class Output extends SimpleStageOutput<HelloWorldMessage, Object> {
     }
 
     public static class HelloWorldMessage {
